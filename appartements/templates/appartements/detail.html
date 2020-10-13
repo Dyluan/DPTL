@@ -1,0 +1,19 @@
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+
+<h1>{{ appartement }}</h1>
+
+<ul class='list-group'>
+    <li class='list-group-item'>{{ appart }}
+        <ul class='list-group'>
+            <li class='list-group-item'>{{ appartement.taille }} m²</li>
+            <li class='list-group-item'>{{ appartement.prix }} €</li>
+            <li class='list-group-item'>{{ appartement.nb_chambres }} chambre(s)</li>
+            <li class='list-group-item'>{{ appartement.commune }}</li>
+            <li class='list-group-item'><a href="{{appartement.lien}}">{{ appartement.lien }}</a></li>
+            <li class='list-group-item'>{{ appartement.cout_par_chambre }} €/chambre</li>
+            <li class='list-group-item'>{{ appartement.cout_par_metre }} €/m²</li>
+            <li class='list-group-item'>ID: {{ appartement.immoID }}</li>
+        </ul>
+    </li>
+</ul>
