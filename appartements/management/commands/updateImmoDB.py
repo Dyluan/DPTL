@@ -7,6 +7,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 from appartements.models import Appartement
 
@@ -28,7 +29,10 @@ class Command(BaseCommand):
 
     def handle(self, *args, **kwargs):
 
-        driver = webdriver.Firefox(executable_path = "C:\\Users\\Dylan\\Documents\\python\\geckodriver-v0.26.0-win64\\geckodriver.exe")
+        caps = DesiredCapabilities().FIREFOX
+        caps["pageLoadStrategy"] = "none"  
+
+        driver = webdriver.Firefox(desired_capabilities=caps, executable_path = "C:\\Users\\Dylan\\Documents\\python\\geckodriver-v0.26.0-win64\\geckodriver.exe")
 
         #gets the list of all the appartements objects in the database
         listedAppartements = Appartement.objects.filter(immoID__lte=0)
@@ -46,7 +50,6 @@ class Command(BaseCommand):
                     driver.get(url)
 
                     try:
-                        elementToBeLocated = WebDriverWait(driver, 3).until(EC.presence_of_element_located((By.XPATH, IDPath)))
 
                         driver.implicitly_wait(1)
 
@@ -68,7 +71,7 @@ class Command(BaseCommand):
                     except TimeoutException:
                         print('Loading took too much time.')
                         driver.close()
-                        driver = webdriver.Firefox(executable_path = "C:\\Users\\Dylan\\Documents\\python\\geckodriver-v0.26.0-win64\\geckodriver.exe")
+                        driver = webdriver.Firefox(desired_capabilities=caps, executable_path = "C:\\Users\\Dylan\\Documents\\python\\geckodriver-v0.26.0-win64\\geckodriver.exe")
                         driver.get(url)
 
                     

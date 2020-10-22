@@ -11,14 +11,16 @@ class Appartement(models.Model):
     LOW_TO_MID = 450
     MID = 600
     MID_TO_HIGH = 900
-    HIGH = 1400
+    HIGH_TO_VHIGH = 1400
+    HIGH = 1800
     
     PRIX_CHOICES = [
         (LOW, '< 300€'),
         (LOW_TO_MID, '< 450€'),
         (MID, '< 600€'),
         (MID_TO_HIGH, '< 900€'),
-        (HIGH, '< 1400€'),
+        (HIGH_TO_VHIGH, '< 1400€'),
+        (HIGH, '< 1800€'),
     ]
 
 
@@ -41,6 +43,6 @@ class Appartement(models.Model):
     def __str__(self):
         return str(self.prix) + '€ ' + self.commune
 
-#allows to delete all the duplicates 'lien' in the database
-#for lien in Appartement.objects.values_list('lien', flat=True).distinct(): 
-#   Appartement.objects.filter(pk__in=Appartement.objects.filter(lien=lien).values_list('id', flat=True)[1:]).delete()
+#allows to delete all the duplicates 'immoID' in the database
+#for immoID in Appartement.objects.values_list('immoID', flat=True).distinct(): 
+#   Appartement.objects.filter(pk__in=Appartement.objects.filter(immoID=immoID).values_list('id', flat=True)[1:]).delete()
