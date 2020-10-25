@@ -5,7 +5,9 @@ from django.db import models
 
 #https://docs.djangoproject.com/fr/3.1/ref/models/fields/#enumeration-types
 
-#TO DO:: make the immoID unique after giving a value to each
+#change the ID system
+#better add some letters before the ImmoID numbers. Letters refering to the site they were taken from.
+#ex: IM9898153 for an ImmoWeb ID and ZM9898153 for a zimmoWeb
 class Appartement(models.Model):
     LOW = 300
     LOW_TO_MID = 450
