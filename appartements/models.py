@@ -30,6 +30,7 @@ class Appartement(models.Model):
     commune = models.CharField(max_length=100)
     lien = models.CharField(max_length=300, unique=True)
     immoID = models.IntegerField(default=0)
+    zimmoID = models.CharField(max_length=50)
 
     def dans_mes_moyens(self):
         return self.cout_par_chambre <= 600

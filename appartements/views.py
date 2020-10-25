@@ -9,7 +9,7 @@ class IndexView(generic.ListView):
     model = Appartement
     template_name = 'appartements/index.html'
     paginate_by = 15
-    queryset = Appartement.objects.all().order_by('prix')
+    queryset = Appartement.objects.all().order_by('prix', '-taille')
     context_object_name = 'latest_appartements'
 
 
@@ -24,7 +24,7 @@ class IndexView(generic.ListView):
 
     #allows to filter the view depending on the form
     def get_queryset(self):
-        qs = self.model.objects.all().order_by('prix')
+        qs = self.model.objects.all().order_by('prix', '-taille')
         Appartement_filtered_list = AppartementFilter(self.request.GET, queryset=qs)
 
         return Appartement_filtered_list.qs
