@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.common.exceptions import TimeoutException, NoSuchElementException
 from django.core.management.base import BaseCommand
 import math
+import re
 
 from appartements.models import Appartement
 
@@ -13,7 +14,6 @@ class Command(BaseCommand):
 		get_elements(res)
 
 #TO DO: 
-#Format location and text in get_elements function.
 #Add the results to the database if they're not already in.
 #Check Before anything that the links are not in the database. Only do the job if not. Save some time.
 
@@ -120,23 +120,30 @@ def get_elements(url_list):
 		try:
 			price_path = '/html/body/div[3]/div[3]/section[1]/div[2]/div/section[2]/div/div[1]/div[2]/div/span'
 			price_path_text = driver.find_element_by_xpath(price_path).text
-			#I should format the text first.
-			#price = int(price_path_text)
-			print(price_path_text)
+			#formating the price to make it an int. '€ x.xxx' by default.
+			price = int(''.join(re.findall(r'\d+', price_path_text)))
+			print(price, '€')
 		
 		except:
 			print('Price not available.')
-			#price = 0
+			price = 0
 		
 		try:
-			location_text = driver.find_element_by_css_selector('h2.section-title')
-			#the location should be formated as well.
+			#if the full address is not communicated on the webpage.
+			location_path = '/html/body/div[3]/div[3]/section[1]/div[2]/div/section[2]/div/div[1]/div[1]/h2/span[2]'
+			location_text = driver.find_element_by_xpath(location_path)
 			location = location_text.text
-			print(location)
 		
-		except:
-			print('Location not found.')
-			location = ''
+		except NoSuchElementException:
+			#if the full address is communicated on the webpage.
+			#I should then get rid of the street and only keep the locality.
+			location_path = '/html/body/div[3]/div[3]/section[1]/div[2]/div/section[2]/div/div[1]/div[1]/h2/span'
+			location_text = driver.find_element_by_xpath(location_path).text
+			location = location_text.split(',')[-1]
+			location = location[1:]
+		
+		finally:
+			print(location)
 		
 		link = url
 		print(link, '\n\n')
