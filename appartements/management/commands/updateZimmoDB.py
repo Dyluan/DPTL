@@ -16,8 +16,17 @@ class Command(BaseCommand):
 #TO DO: 
 #Add the results to the database if they're not already in.
 #Check Before anything that the links are not in the database. Only do the job if not. Save some time.
-
+#Handle the possible webdriver connections errors.
+#Handle the Captchas.
+#Add an ID to GeneralID. Format: ZIMXXXXXXXXXX
 def get_links():
+
+	database_qs = Appartement.objects.all()
+	database_urls = []
+	#getting all the urls already present in the database
+	for elem in database_qs:
+		database_urls.append(elem.lien)
+
 	driver = webdriver.Firefox(executable_path = "C:\\Users\\Dylan\\Documents\\python\\geckodriver-v0.26.0-win64\\geckodriver.exe")
 	url = 'https://www.zimmo.be/fr/biens/?status=2&type%5B0%5D=5&type%5B1%5D=1&type%5B2%5D=6&hash=26b58fc8b088a7a5aa4254238b31bd22&priceMax=1800&priceIncludeUnknown=1&priceChangedOnly=0&bedroomsIncludeUnknown=0&bathroomsIncludeUnknown=1&constructionIncludeUnknown=1&livingAreaIncludeUnknown=0&landAreaIncludeUnknown=1&commercialAreaIncludeUnknown=1&yearOfConstructionIncludeUnknown=1&epcIncludeUnknown=1&queryCondition=and&includeNoPhotos=1&includeNoAddress=1&onlyRecent=0&onlyRecentlyUpdated=0&isPlus=0&excludedEstates%5B0%5D=JPE0S&excludedEstates%5B1%5D=JPP2A&excludedEstates%5B2%5D=JPTPG&excludedEstates%5B3%5D=JQ7OO&region=list&district=MzSEAAMDQxgAAA%253D%253D&pagina=1#gallery'
 	driver.get(url)
@@ -27,7 +36,7 @@ def get_links():
 
 	try:
 
-		#the webdriver should first click the Cookies button in order to cath the nb_pages path.
+		#the webdriver first clicks the Cookies button in order to cath the nb_pages path.
 		button_path = '/html/body/div[1]/div/div/div/div/div/div[3]/button[2]/span'
 		button = driver.find_element_by_xpath(button_path)
 
@@ -38,7 +47,7 @@ def get_links():
 		nb_pages = int(nb_pagesBrut.text)
 		print('il y a', nb_pages, 'pages\n\n')
 
-		for i in range(1, 2):
+		for i in range(1, nb_pages+1):
 
 			print('\n\n------- PAGE', i,'/', nb_pages+1, '-------\n\n')
 			
@@ -64,8 +73,12 @@ def get_links():
 						link_path = '/html/body/div[3]/div[3]/div[4]/div[2]/div[2]/div['+str(j)+']/div['+str(4+incr)+']/a'
 						link_text = driver.find_element_by_xpath(link_path).get_attribute('href')
 
-						res.append(link_text)
-						print(link_text)
+						if link_text not in database_urls:
+							res.append(link_text)
+							print(link_text)
+						
+						else:
+							print('Link already present in the database')
 							
 					#exception related to the link_text of each item.
 					except:
@@ -142,10 +155,23 @@ def get_elements(url_list):
 			location = location_text.split(',')[-1]
 			location = location[1:]
 		
+		except:
+			location = ''
+		
 		finally:
 			print(location)
 		
 		link = url
 		print(link, '\n\n')
+
+		#I should first make a system to get an UNIVERSAL ID to all the items in the database
+		'''if floor_surface != 0 and nb_rooms != 0 and price != 0 and location != '':
+			Appartement.objects.create(
+				taille = floor_surface,
+				prix = price,
+				nb_chambres = nb_rooms,
+				commune = location,
+				lien = url,
+			)'''
 	
 	driver.quit()

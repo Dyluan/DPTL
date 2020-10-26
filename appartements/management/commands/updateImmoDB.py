@@ -34,8 +34,10 @@ class Command(BaseCommand):
 
         driver = webdriver.Firefox(desired_capabilities=caps, executable_path = "C:\\Users\\Dylan\\Documents\\python\\geckodriver-v0.26.0-win64\\geckodriver.exe")
 
-        #gets the list of all the appartements objects in the database
-        listedAppartements = Appartement.objects.filter(immoID__lte=0)
+        #WARNING: ImmoID doesnt exist anymore. Has been replaced by GeneralID, a String.
+
+        #gets the list of all the appartements in the database which GeneralID is empty
+        listedAppartements = Appartement.objects.filter(generalID='empty')
 
         IDPath = '/html/body/div[1]/div[2]/div/div/main/div[1]/div[2]/div/div/div[1]/div/div[2]/div[3]'
 
@@ -56,12 +58,13 @@ class Command(BaseCommand):
                         IDBrut = driver.find_element_by_xpath(IDPath)
 
                         IDBrutList = re.findall(r'\d+', IDBrut.text)
-
-                        finalID = int(IDBrutList[0])
+                        #maybe fix that part
+                        finalID = 'IMM' + IDBrutList[0]
 
                         try:
                             print('----',finalID, '----')
-                            elem.immoID = finalID
+                            #maybe fix
+                            elem.generalID = finalID
                             elem.save()
                             print('ID updated')
 
