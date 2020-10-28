@@ -18,8 +18,8 @@ class Command(BaseCommand):
 
 		driver.get(url)
 		driver.implicitly_wait(3)
-
-		myBdd_qs = Appartement.objects.filter(immoID__gt=0)
+		#maybe fix
+		myBdd_qs = Appartement.objects.filter(generalID='empty')
 		my_lien_list = []
 
 		for elem in myBdd_qs:
@@ -106,7 +106,8 @@ class Command(BaseCommand):
 										prix = prixNet,
 										nb_chambres = nb_ch,
 										commune = communeNet,
-										lien = lien_text)
+										lien = lien_text,
+										generalID='empty')
 									print('%s added' % (lien_text))
 								except:
 									print('%s already exists' % (lien_text))

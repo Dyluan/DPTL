@@ -45,6 +45,6 @@ class Appartement(models.Model):
     def __str__(self):
         return str(self.prix) + '€ ' + self.commune
 
-#allows to delete all the duplicates 'immoID' in the database
-#for immoID in Appartement.objects.values_list('immoID', flat=True).distinct(): 
-#   Appartement.objects.filter(pk__in=Appartement.objects.filter(immoID=immoID).values_list('id', flat=True)[1:]).delete()
+#allows to delete all the duplicates 'generalID' in the database. Apparently destroys all the immoweb items...
+#for generalID in Appartement.objects.values_list('generalID', flat=True).distinct(): 
+#   Appartement.objects.filter(pk__in=Appartement.objects.filter(generalID=generalID).values_list('id', flat=True)[1:]).delete()

@@ -14,11 +14,16 @@ class Command(BaseCommand):
 		get_elements(res)
 
 #TO DO: 
-#Add the results to the database if they're not already in.
 #Check Before anything that the links are not in the database. Only do the job if not. Save some time.
 #Handle the possible webdriver connections errors.
-#Handle the Captchas.
-#Add an ID to GeneralID. Format: ZIMXXXXXXXXXX
+#Handle the Captchas. IMPORTANT
+
+''' Bot Captcha
+click_path = '/html/body/div[2]/div[3]/div[1]/div/div/span/div[1]'
+url = 'http://validate.perfdrive.com/21240cc12f281084e3ed3f9d063dd905/?ssa=c4216176-bda6-4e05-8956-8bd17f617201&ssb=06222218949&ssc=https%3A%2F%2Fwww.zimmo.be%2Ffr%2Fixelles-1050%2Fa-louer%2Fappartement%2FJPD9I%2F%3Fsearch%3D26b58fc8b088a7a5aa4254238b31bd22&ssi=503e4b72-a26d-427d-bc7e-e6c35e9e78ad&ssk=helpdesk@zimmo.be&ssm=9992375920827112623410077088704592&ssn=1fa57f6f1b7c9f7a31083d9356348b7c845352f10c88-6268-4835-ac2e66&sso=5cdd025c-dc36f464f71bd85b460fcd2da3d5b12ffadd219ae286bbd8&ssp=77986054191603707457160378387186880&ssq=41146443702891681688734317694492271226055&ssr=ODEuMTY0Ljk4LjEyOQ==&sst=Mozilla/5.0%20(Windows%20NT%2010.0;%20Win64;%20x64;%20rv:82.0)%20Gecko/20100101%20Firefox/82.0&ssv=&ssw=BGQDbwMwVWkDKld2B25VZVdjB29UIwIlBWYII1QlBzgGOVYxClFRO1I3UiZRbQh9BGwAYVEwUWoCJFUzXDoANQs8XDxXNwdjV2YAbQAxADcEPQNjAzFVYANoVzMHZFVjVzUHMVQyAjcFNAhoVDcHaQZnVmYKPFFqUmtSJlFtCH0EbABjUTJRagIkVW5ceQALC2xcYFcxByNXYgB6AHcAIQQ%2BAyYDPlViA2FXPwd2VWVXYAdjVDgCYQUxCGdUYAdgBmFWfQo1USFSaVI1UWYINAR0ACdRcVE1AnRVWFxoADMLaFxqVyEHc1c8AHoAPgA2BDUDbwMmVR4DPld%2FBz1VOFc%2FBzRULgJjBS0IYFR2B3kGAVY2CmBRNlI8UnNRJQguBBgABlEiUWECNlUpXDkAbwstXFNXPAc%2FVzEAPQA%2FACMEfQNjAzBVaANxV3cHIlVuV2sHZ1QvAmYFKghyVG0HIgZsVm4KPVFoUnFSaFE3CH0EIgANUWNRMwJyVW5cfwA9C3lcfVd3B2pXdAAzADUAMwQ%2FA3cDNVVlA2FXNgdjVWdXZwdmVDACYQUhCGtUKw%3D%3D'
+'''
+
+
 def get_links():
 
 	database_qs = Appartement.objects.all()
@@ -161,17 +166,37 @@ def get_elements(url_list):
 		finally:
 			print(location)
 		
+		try:
+			ID_path = '/html/body/div[3]/div[3]/section[1]/div[2]/div/section[2]/div/div[1]/p'
+			ID_brut = driver.find_element_by_xpath(ID_path).text
+			#formatting because ID_brut == 'Code Zimmo: IDIDIDIDID'
+			ID_str = ID_brut.split(':')[-1]
+			ID = 'ZIM' + ID_str[1:]
+			print(ID)
+		
+		except:
+			print('Unable to locate ID')
+			ID = 'empty'
+		
 		link = url
 		print(link, '\n\n')
 
 		#I should first make a system to get an UNIVERSAL ID to all the items in the database
-		'''if floor_surface != 0 and nb_rooms != 0 and price != 0 and location != '':
-			Appartement.objects.create(
-				taille = floor_surface,
-				prix = price,
-				nb_chambres = nb_rooms,
-				commune = location,
-				lien = url,
-			)'''
+		if floor_surface != 0 and nb_rooms != 0 and price != 0 and location != '' and ID != 'empty':
+			try:
+				Appartement.objects.create(
+					taille = floor_surface,
+					prix = price,
+					nb_chambres = nb_rooms,
+					commune = location,
+					lien = url,
+					generalID=ID
+				)
+		
+				print(ID, 'Added\n\n')
+
+			except:
+				print(ID, 'Already in the database.')
+		
 	
 	driver.quit()
