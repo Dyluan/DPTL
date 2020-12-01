@@ -1,0 +1,95 @@
+1605266305405	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Dylan\\AppData\\Local\\Temp\\rust_mozprofileaUCxyG"
+Can't find symbol 'eglSwapBuffersWithDamageEXT'.
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1605266310775	Marionette	INFO	Listening on port 55524
+1605266311270	Marionette	WARN	TLS certificate errors will be ignored for this session
+1605266315856	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:228:19
+TimedPromise@chrome://marionette/content/sync.js:213:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:418:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: https://www.loxam.fr/wro/all_responsive.js?v=1604925077, line 1159: Error: https://vars.hotjar.com is not allowed to override this storefront.
+1605266384473	Marionette	INFO	Stopped listening on port 55524
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+1605266697707	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Dylan\\AppData\\Local\\Temp\\rust_mozprofile753NXl"
+Can't find symbol 'eglSwapBuffersWithDamageEXT'.
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1605266701502	Marionette	INFO	Listening on port 55669
+1605266701976	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://www.loxam.fr/wro/all_responsive.js?v=1604925077, line 1159: Error: https://vars.hotjar.com is not allowed to override this storefront.
+1605266727273	Marionette	INFO	Stopped listening on port 55669
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+1605267032217	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Dylan\\AppData\\Local\\Temp\\rust_mozprofile8tgJtZ"
+Can't find symbol 'eglSwapBuffersWithDamageEXT'.
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1605267037351	Marionette	INFO	Listening on port 55830
+1605267037600	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://www.loxam.fr/wro/all_responsive.js?v=1604925077, line 1159: Error: https://vars.hotjar.com is not allowed to override this storefront.
+1605267061497	Marionette	INFO	Stopped listening on port 55830
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+1605267066651	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Dylan\\AppData\\Local\\Temp\\rust_mozprofilegIhRJs"
+Can't find symbol 'eglSwapBuffersWithDamageEXT'.
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1605267071878	Marionette	INFO	Listening on port 55930
+1605267072033	Marionette	WARN	TLS certificate errors will be ignored for this session
+1605267077087	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://marionette/content/sync.js:228:19
+TimedPromise@chrome://marionette/content/sync.js:213:10
+interaction.flushEventLoop@chrome://marionette/content/interaction.js:418:10
+webdriverClickElement@chrome://marionette/content/interaction.js:179:31
+JavaScript error: https://www.loxam.fr/wro/all_responsive.js?v=1604925077, line 1159: Error: https://vars.hotjar.com is not allowed to override this storefront.
+1605267090002	Marionette	INFO	Stopped listening on port 55930
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+1605273391721	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "-marionette" "-foreground" "-no-remote" "-profile" "C:\\Users\\Dylan\\AppData\\Local\\Temp\\rust_mozprofiletrFMW4"
+Can't find symbol 'eglSwapBuffersWithDamageEXT'.
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1605273395591	Marionette	INFO	Listening on port 56725
+1605273396200	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://www.loxam.fr/wro/all_responsive.js?v=1604925077, line 1159: Error: https://vars.hotjar.com is not allowed to override this storefront.
+JavaScript error: https://www.loxam.fr/wro/all_responsive.js?v=1604925077, line 1159: Error: https://vars.hotjar.com is not allowed to override this storefront.
+1605274611402	Marionette	INFO	Stopped listening on port 56725
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
+sWithDamageEXT'.
+JavaScript error: resource://gre/modules/XULStore.jsm, line 66: Error: Can't find profile directory.
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new Error("", "(unknown module)"))
+1605273449577	Marionette	INFO	Listening on port 56815
+1605273450306	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: https://www.loxam.fr/wro/all_responsive.js?v=1604925077, line 1159: Error: https://vars.hotjar.com is not allowed to override this storefront.
+JavaScript error: https://www.loxam.fr/wro/all_responsive.js?v=1604925077, line 1159: Error: https://vars.hotjar.com is not allowed to override this storefront.
+1605273460860	Marionette	INFO	Stopped listening on port 56815
+
+###!!! [Child][RunMessage] Error: Channel closing: too late to send/recv, messages will be lost
+
+
+###!!! [Child][MessageChannel::SendAndWait] Error: Channel error: cannot send/recv
+
