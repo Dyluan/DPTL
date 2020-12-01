@@ -22,7 +22,8 @@ class IndexView(generic.ListView):
 
         return context
 
-    #allows to filter the view depending on the form
+    #the queryset above informs django the queryset to perform. This is equal to this funtion.
+    #BUT this is needed here as I use the a django-filter to filter the results.
     def get_queryset(self):
         qs = self.model.objects.all().order_by('prix', '-taille')
         Appartement_filtered_list = AppartementFilter(self.request.GET, queryset=qs)
@@ -34,5 +35,6 @@ class DetailView(generic.DetailView):
     model = Appartement
     template_name = 'appartements/detail.html'
 
-    def get_queryset(self):
-        return Appartement.objects.all()
+    #It looks like informating model = Appartement equals to that get_queryset function.
+    #def get_queryset(self):
+    #    return Appartement.objects.all()
