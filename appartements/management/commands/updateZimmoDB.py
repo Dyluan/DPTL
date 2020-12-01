@@ -95,7 +95,7 @@ def get_links():
 
 	except:
 		print('nombre de pages non spécifié\n')
-		driver.quit()
+	
 	finally:
 		driver.quit()
 		return res

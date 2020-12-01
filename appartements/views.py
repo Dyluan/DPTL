@@ -1,8 +1,14 @@
 from django.shortcuts import render
 from django.views import generic
 
+from .forms import ContactForm
 from .filters import AppartementFilter
 from .models import Appartement
+
+class FormView(generic.FormView):
+    template_name = 'appartements/loginIndex.html'
+    form_class = ContactForm
+
 
 #class IndexView(generic.TemplateView):
 class IndexView(generic.ListView):
