@@ -33,7 +33,7 @@ try:
 
     f = open('boels.csv', 'w', encoding='utf-8')
 
-    titles = 'nom;id;url;daily_price;weekly_price;description\n'
+    titles = 'nom;id;url;daily_price;weekly_price;description;img_link;tag_list;img_id\n'
     f.write(titles)
 
     #gets the driver to scroll down the page to make it able to fetch our requirements.
@@ -159,6 +159,38 @@ try:
                 driver.get(link)
                 driver.implicitly_wait(5)
 
+                list_of_tags = ''
+
+                try:
+                    container = driver.find_element_by_class_name('product-info-container')
+
+                    total_as = container.find_elements_by_tag_name('a')
+
+                    for a in total_as:
+                        if a.get_attribute('data-original-title') != None:
+                            temp = a.get_attribute('data-original-title')
+                            list_of_tags+=' + ' + temp
+                
+                    print('List of tags:', list_of_tags)
+
+                except NoSuchElementException as e:
+                    print('List of tags:', e)
+                    list_of_tags = ''
+                
+                try:
+                    img_path = '/html/body/div[5]/div[2]/div[2]/div/section/div[1]/div[1]/div/div/div[1]/div/div[1]/div[1]/a[1]'
+                    img = driver.find_element_by_xpath(img_path).get_attribute('href')
+
+                    print('Image link:', img)
+
+                    boels_id = img.replace(':', '@')
+                    boels_id = boels_id.replace('/', '_')
+                
+                except NoSuchElementException as e:
+                    print('Image link:', e)
+                    img = ''
+                    boels_id = ''
+
                 try:
                     item_name_path = '/html/body/div[5]/div[2]/div[2]/div/header/h1'
                     item_name = driver.find_element_by_xpath(item_name_path).text
@@ -253,7 +285,7 @@ try:
                 driver.implicitly_wait(5)
                 pass
             
-            f.write(item_name + ';' + id + ';'+ link + ';' + daily_price + ';' + weekly_price + ';' + item_desc + '\n')
+            f.write(item_name + ';' + id + ';'+ link + ';' + daily_price + ';' + weekly_price + ';' + item_desc + ';' + img + ';' + list_of_tags + ';' + boels_id + '\n')
     
     except NoSuchElementException as e:
         print('Link:', e)
